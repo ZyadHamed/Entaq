@@ -70,8 +70,19 @@ while True:
         elif Distance(last_data[0].landmark[4], last_data[0].landmark[8], img) <= 1 and Distance(last_data[0].landmark[8], last_data[0].landmark[12], img) >= 3 and Distance(last_data[0].landmark[12], last_data[0].landmark[16], img) <= 1.6 and Distance(last_data[0].landmark[16], last_data[0].landmark[20], img) >= 2:
             fullChar = ""
             fullChar = "Perfecto"
+
+
         print(Distance(last_data[0].landmark[4], last_data[0].landmark[8], img))
         print(Distance(last_data[0].landmark[14], last_data[0].landmark[10], img))
+    elif keyboard.is_pressed("s"):
+        fullChar = ""
+    elif keyboard.is_pressed("w"):
+        if Distance(last_data[0].landmark[7], last_data[0].landmark[11], img) <= 2 and Distance(last_data[0].landmark[11], last_data[0].landmark[15], img) <= 2 and Distance(last_data[0].landmark[15], last_data[0].landmark[19], img) <= 2 and 3 >= Distance(
+                last_data[0].landmark[4], last_data[0].landmark[6], img) < 1.2 and Distance(last_data[1].landmark[7], last_data[1].landmark[11], img) <= 2 and Distance(last_data[1].landmark[11], last_data[1].landmark[15], img) <= 2 and Distance(last_data[1].landmark[15], last_data[1].landmark[19], img) <= 2 and 3 >= Distance(
+                last_data[1].landmark[4], last_data[1].landmark[6], img) < 1.2:
+            print('S')
+            fullChar += 'Suiiiiiiiii'
     cv2.putText(img, fullChar, (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
+
     cv2.imshow("Image", img)
     cv2.waitKey(1)
