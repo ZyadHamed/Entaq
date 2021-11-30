@@ -1,9 +1,12 @@
 import math
-
+from playsound import playsound
 import cv2
 import time
 import mediapipe as mp
 import keyboard
+import numpy as np
+import multiprocessing
+import winsound
 
 def Distance(landmark1, landmark2, image):
     x1 = landmark1.x * image.shape[1]
@@ -69,6 +72,7 @@ while True:
             fullChar += 'M'
         elif Distance(last_data[0].landmark[4], last_data[0].landmark[8], img) <= 1 and Distance(last_data[0].landmark[8], last_data[0].landmark[12], img) >= 3 and Distance(last_data[0].landmark[12], last_data[0].landmark[16], img) <= 1.6 and Distance(last_data[0].landmark[16], last_data[0].landmark[20], img) >= 2:
             fullChar = ""
+            fullChar = ""
             fullChar = "Perfecto"
 
 
@@ -81,7 +85,11 @@ while True:
                 last_data[0].landmark[4], last_data[0].landmark[6], img) < 1.2 and Distance(last_data[1].landmark[7], last_data[1].landmark[11], img) <= 2 and Distance(last_data[1].landmark[11], last_data[1].landmark[15], img) <= 2 and Distance(last_data[1].landmark[15], last_data[1].landmark[19], img) <= 2 and 3 >= Distance(
                 last_data[1].landmark[4], last_data[1].landmark[6], img) < 1.2:
             print('S')
-            fullChar += 'Suiiiiiiiii'
+            winsound.PlaySound('SUIII.wav', winsound.SND_FILENAME)
+        elif Distance(last_data[0].landmark[4], last_data[1].landmark[4], img) < 1.2 and Distance(last_data[0].landmark[8], last_data[1].landmark[8], img) < 1.2 and Distance(last_data[0].landmark[4], last_data[0].landmark[8], img) > 2.3 and Distance(last_data[1].landmark[4], last_data[1].landmark[8], img) > 2.3:
+            fullChar = 'Heart'
+        elif Distance(last_data[0].landmark[8], last_data[1].landmark[8], img) < 1.2 and Distance(last_data[0].landmark[4], last_data[1].landmark[4], img) > 4:
+            fullChar = 'Please'
     cv2.putText(img, fullChar, (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
 
     cv2.imshow("Image", img)
